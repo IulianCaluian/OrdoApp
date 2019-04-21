@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "404590239278",
+    "firebase_url": "https://ordo-9fdfb.firebaseio.com",
+    "project_id": "ordo-9fdfb",
+    "storage_bucket": "ordo-9fdfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404590239278:android:6ff51f5778b2d52c",
+        "android_client_info": {
+          "package_name": "ordo.azurewebsites.net.ordo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404590239278-2epl0o1eiutkl3kpag401lc40tf5e7ki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ordo.azurewebsites.net.ordo",
+            "certificate_hash": "d11fb35a4c89290f68c7ae38af0431d858abbeed"
+          }
+        },
+        {
+          "client_id": "404590239278-hs9fvkgkkfbp72uqui6ivmc23mh1uhtd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQEAK-Y2Mwkpqg1LSgFaQhslXhJgpMW-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404590239278-hs9fvkgkkfbp72uqui6ivmc23mh1uhtd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
