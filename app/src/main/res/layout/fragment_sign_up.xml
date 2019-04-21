@@ -2,11 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+
 
     <TextView
-        android:text="Hello"
+        style="?android:listSeparatorTextViewStyle"
+        android:minWidth="200dp"
+        android:text="@string/email_label"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/email_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:minWidth="200dp"
+        android:text="@string/password_label"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_marginTop="12dp"
+        android:text="@string/sign_up_label"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_sign_up"
+        android:visibility="invisible"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
 
 </LinearLayout>
