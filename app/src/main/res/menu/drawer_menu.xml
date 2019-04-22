@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_scan"
+            android:title="Scan"/>
+        <item android:id="@+id/nav_restaurant"
+            android:title="Restaurant"/>
+        <item android:id="@+id/nav_menu"
+            android:title="Meniu"/>
+        <item android:id="@+id/nav_history"
+            android:title="Istoric comenzi"/>
+        <item android:id="@+id/nav_settings"
+            android:title="Setari"/>
+    </group>
+
+    <item android:title="Delogare">
+        <menu>
+            <item android:id="@+id/nav_log_off"
+                android:title="Log off"/>
+        </menu>
+    </item>
+</menu>
