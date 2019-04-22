@@ -20,7 +20,7 @@ public class ItemOrderBaseHelper extends SQLiteOpenHelper {
                 " _id integer primary key autoincrement, " +
                 ItemOrderTable.Cols.UUID + ", " +
                 ItemOrderTable.Cols.TITLE + ", " +
-                ItemOrderTable.Cols.DATE + 
+                ItemOrderTable.Cols.DATE +
                 ")");
     }
 

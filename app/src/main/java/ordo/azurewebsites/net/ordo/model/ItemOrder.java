@@ -10,7 +10,11 @@ public class ItemOrder {
     private Date mDate;
 
     public ItemOrder(){
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public ItemOrder(UUID itemOrderId){
+        mId = itemOrderId;
         mDate = new Date();
     }
 

@@ -47,7 +47,7 @@ public class ItemOrderFragment extends Fragment {
         mDateTextView = v.findViewById(R.id.item_order_date);
 
         mTitleTextView.setText(mItemOrder.getTitle());
-        mDateTextView.setText(mItemOrder.getTitle());
+        mDateTextView.setText(mItemOrder.getDate().toString());
 
         return v;
     }

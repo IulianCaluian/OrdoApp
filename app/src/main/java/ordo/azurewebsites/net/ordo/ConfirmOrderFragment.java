@@ -24,6 +24,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.concurrent.TimeoutException;
 
 import ordo.azurewebsites.net.ordo.model.Item;
+import ordo.azurewebsites.net.ordo.model.ItemOrder;
+import ordo.azurewebsites.net.ordo.model.ItemOrderLib;
 
 public class ConfirmOrderFragment extends DialogFragment {
 
@@ -57,7 +59,16 @@ public class ConfirmOrderFragment extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         // trimit itm-ul;
-                        final String message = "1x " + itm.getItemName() + "," + itm.getItemQuantity() + ".............." + itm.getItemPrice().toString();
+                        final String message = "1 x " + itm.getItemName() + " , " + itm.getItemQuantity() + " ...... " + itm.getItemPrice().toString();
+
+                        //Adaug itm-ul in db.
+                        ItemOrder itemOrder = new ItemOrder();
+                        itemOrder.setTitle(message);
+                        ItemOrderLib.get(getActivity()).addItemOrder(itemOrder);
+
+
+
+
                         final ConnectionFactory factory = new ConnectionFactory();
                         final String QUEUE_NAME = "restaurant_q_" + itm.getRestaurantId();
 
