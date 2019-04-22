@@ -45,6 +45,7 @@ public class MenuFragment extends Fragment {
 
     private ItemAdapter adapter;
     private RecyclerView recyclerView;
+    private boolean mActivityPaused = false;
 
     @Nullable
     @Override
@@ -61,11 +62,13 @@ public class MenuFragment extends Fragment {
         call.enqueue(new Callback<ItemList>() {
             @Override
             public void onResponse(Call<ItemList> call, Response<ItemList> response) {
+                if (mActivityPaused) return;
                 generateEmployeeList(view,response.body().getItemsArrayList());
             }
 
             @Override
             public void onFailure(Call<ItemList> call, Throwable t) {
+                if (mActivityPaused) return;
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                 Log.wtf("URL Called", call.request().url() + t.toString());
             }
@@ -74,9 +77,21 @@ public class MenuFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mActivityPaused = false;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mActivityPaused = true;
+    }
 
     /*Method to generate List of employees using RecyclerView with custom adapter*/
     private void generateEmployeeList(View view,ArrayList<Item> itemDataList) {
+        if(view == null) return; //daca nu mai am view-ul , poate s-a terminat.
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_item_list);
 
         adapter = new ItemAdapter(itemDataList);
