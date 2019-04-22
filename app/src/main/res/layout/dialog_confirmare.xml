@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="4dp">
+    <TextView
+        android:textSize="16sp"
+        android:maxWidth="200dp"
+        android:gravity="center"
+        android:text="@string/string_confirmare_intrebare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/dialog_text_order"
+        android:padding="4dp"
+        tools:text="1 x coca cola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="196dp"
+        android:textSize="12sp"/>
+
+</LinearLayout>

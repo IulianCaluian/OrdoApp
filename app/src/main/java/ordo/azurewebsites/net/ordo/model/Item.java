@@ -1,10 +1,11 @@
 package ordo.azurewebsites.net.ordo.model;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class Item {
+public class Item implements Serializable {
     @SerializedName("item_id")
     public UUID ItemId;
     @SerializedName("item_name")

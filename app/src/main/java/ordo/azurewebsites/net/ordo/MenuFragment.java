@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -40,6 +41,8 @@ import ordo.azurewebsites.net.ordo.network.GetItemDataService;
 import ordo.azurewebsites.net.ordo.network.RetrofitInstance;
 
 public class MenuFragment extends Fragment {
+    private static final String DIALOG_CONFIRM = "DialogConfirm";
+
     private ItemAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -132,71 +135,9 @@ public class MenuFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                // trimit itm-ul;
-                final String message = "1x " + itm.getItemName() + "," + itm.getItemQuantity() + ".............." + itm.getItemPrice().toString();
-                final ConnectionFactory factory = new ConnectionFactory();
-                final String QUEUE_NAME = "restaurant_q_" + itm.getRestaurantId();
-
-                final JSONObject obj = new JSONObject();
-                try {
-                    obj.put("order", message);
-                    obj.put("table", 2);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-                factory.setUsername("mxexrkxf");
-                factory.setPassword("GFppRhHEqe047SjDERyqjrBAFqNBvehV");
-                // factory.Port = 15672;
-                factory.setHost("reindeer.rmq.cloudamqp.com");
-                factory.setVirtualHost("mxexrkxf");
-                Log.e("ROZ", "avem o incercare " + message + " Pe canalul " + QUEUE_NAME);
-
-                Thread thread = new Thread() {
-                    @Override
-                    public void run() {
-
-                        Connection connection = null;
-                        try {
-                            connection = factory.newConnection();
-                            Channel channel = null;
-                            try {
-
-
-                                channel = connection.createChannel();
-                                channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-                                channel.basicPublish("", QUEUE_NAME, null, obj.toString().getBytes("UTF-8"));
-                                Log.e("ROZ", "avem o publicare " + message + " Pe canalul " + QUEUE_NAME);
-                            }finally {
-                                try {
-                                    if(channel!=null && channel.isOpen())
-                                        channel.close();
-                                } catch (IOException e1) {
-                                    e1.printStackTrace();
-                                } catch (TimeoutException e1) {
-                                    e1.printStackTrace();
-                                }
-                            }
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (TimeoutException e) {
-                            e.printStackTrace();
-                        } finally{
-                            try {
-                                if(connection!=null && connection.isOpen())
-                                    connection.close();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-                    }
-                };
-                thread.start();
+                FragmentManager manager = getFragmentManager();
+                ConfirmOrderFragment dialog = ConfirmOrderFragment.newInstance(itm);
+                dialog.show(manager, DIALOG_CONFIRM);
             }
 
 
