@@ -1,5 +1,6 @@
 package ordo.azurewebsites.net.ordo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,10 +14,26 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private Toolbar mToolbar;
     private DrawerLayout drawer;
+    private NavigationView mNavigationView;
+
+    public static final String EXTRA_BOOL_HAS_RESTAURANT_ID = "ordo.azurewebsites.net.ordo.has_rest_id";
+
+    public static Intent newIntent(Context packageContext, boolean hasAnRestaurantId) {
+        Intent intent = new Intent(packageContext, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(EXTRA_BOOL_HAS_RESTAURANT_ID, hasAnRestaurantId);
+        return intent;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(mToolbar);
 
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+       mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,mToolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
 
@@ -38,10 +55,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-        if (fragment == null) {
-            fragment = new ScanFragment();
-            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
-            navigationView.setCheckedItem(R.id.nav_scan);
+            if (fragment == null) {
+                fragment = new ScanFragment();
+                fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
+                mNavigationView.setCheckedItem(R.id.nav_scan);
+            }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        boolean hasARestaurantId = getIntent().getBooleanExtra(EXTRA_BOOL_HAS_RESTAURANT_ID,false);
+        if(hasARestaurantId) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new RestaurantFragment()).commit();
+            mNavigationView.setCheckedItem(R.id.nav_restaurant);
         }
     }
 
