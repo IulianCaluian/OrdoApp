@@ -75,6 +75,8 @@ public class ConfirmOrderFragment extends DialogFragment {
                         final JSONObject obj = new JSONObject();
                         try {
                             obj.put("order", message);
+                            obj.put("order_id",itm.getItemId().toString());
+                            obj.put("client","test@test.ro");
                             obj.put("table", 2);
                         } catch (JSONException e) {
                             e.printStackTrace();
