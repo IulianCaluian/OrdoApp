@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent i = PollService.newIntent(this);
+        startService(i);
+
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
@@ -68,11 +71,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-            if (fragment == null) {
-                fragment = new ScanFragment();
-                fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
-                mNavigationView.setCheckedItem(R.id.nav_scan);
-            }
+        if (fragment == null) {
+            fragment = new ScanFragment();
+            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
+            mNavigationView.setCheckedItem(R.id.nav_scan);
+        }
+
+
+
     }
 
     @Override
