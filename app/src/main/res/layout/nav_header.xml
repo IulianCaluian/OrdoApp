@@ -14,9 +14,10 @@
         android:src="@mipmap/ic_launcher_round"/>
     
     <TextView
+        android:id="@+id/email_nav_bar_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test@test.ro"
+        android:text="email@bla"
         android:paddingTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 

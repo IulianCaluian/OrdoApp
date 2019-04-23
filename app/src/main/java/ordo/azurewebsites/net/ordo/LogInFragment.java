@@ -1,7 +1,9 @@
 package ordo.azurewebsites.net.ordo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LogInFragment extends Fragment {
 
@@ -56,6 +59,14 @@ public class LogInFragment extends Fragment {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         mProgressBar.setVisibility(View.INVISIBLE);
                                         if (task.isSuccessful()) {
+                                                //salvem user-ul
+                                                FirebaseUser user = mAuth.getCurrentUser();
+                                                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                                                SharedPreferences.Editor editor = sharedPref.edit();
+                                                editor.putString(getString(R.string.save_user_email_key),user.getEmail());
+                                                editor.commit();
+
+                                                //pornesc noua activitate.
                                                 Intent intent = new Intent(getActivity(), MainActivity.class);
                                                 getActivity().finish();
                                                 startActivity(intent);
