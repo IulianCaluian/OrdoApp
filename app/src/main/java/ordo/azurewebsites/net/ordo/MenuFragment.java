@@ -63,7 +63,11 @@ public class MenuFragment extends Fragment {
             @Override
             public void onResponse(Call<ItemList> call, Response<ItemList> response) {
                 if (mActivityPaused) return;
-                generateEmployeeList(view,response.body().getItemsArrayList());
+                try {
+                    generateEmployeeList(view, response.body().getItemsArrayList());
+                }catch (Exception ex){
+                    Toast.makeText(getActivity(),"Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
