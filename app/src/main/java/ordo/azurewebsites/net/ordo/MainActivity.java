@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent i = PollService.newIntent(this);
-        startService(i);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean showNotification = sharedPref.getBoolean(getString(R.string.save_notification_shown_key),false);
+        PollService.setServiceAlarm(this,showNotification);
 
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View headerLayout =mNavigationView.inflateHeaderView(R.layout.nav_header);
         mEmailTextView = headerLayout.findViewById(R.id.email_nav_bar_text_view);
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String userName = sharedPref.getString(getString(R.string.save_user_email_key),"no_user");
         mEmailTextView.setText(userName);
 

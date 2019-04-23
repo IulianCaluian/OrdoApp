@@ -1,16 +1,20 @@
 package ordo.azurewebsites.net.ordo;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.GetResponse;
 import com.rabbitmq.client.QueueingConsumer;
 
 import org.json.JSONException;
@@ -18,14 +22,36 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class PollService extends IntentService {
     private static final String TAG = "PollService";
+    private static final long POLL_INTERVAL_MS = TimeUnit.MINUTES.toMillis(1);
 
     public static Intent newIntent(Context context) {
         return new Intent(context, PollService.class);
     }
+
+    public static void setServiceAlarm(Context context,boolean isOn){
+        Intent i = PollService.newIntent(context);
+        PendingIntent pi = PendingIntent.getService(context,0,i,0);
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        if(isOn) {
+            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME,
+                    SystemClock.elapsedRealtime(), POLL_INTERVAL_MS, pi);
+        } else {
+            alarmManager.cancel(pi);
+            pi.cancel();
+        }
+    }
+
+    public static boolean isServiceAlarmOn(Context context){
+        Intent i = PollService.newIntent(context);
+        PendingIntent pi = PendingIntent.getService(context,0,i,PendingIntent.FLAG_NO_CREATE);
+            return  pi != null;
+    }
+
     public PollService() {
         super(TAG);
     }
@@ -55,20 +81,18 @@ public class PollService extends IntentService {
                 channel = connection.createChannel();
                 channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
-                QueueingConsumer consumer = new QueueingConsumer(channel);
-                channel.basicConsume(QUEUE_NAME, consumer);
-                //while(true) {
-                QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-                int n = channel.queueDeclarePassive(QUEUE_NAME).getMessageCount();
-                if(delivery != null) {
-                    byte[] bs = delivery.getBody();
-                    Log.wtf(TAG, "Mesaj: "  + new String(bs));
-                    //String message= new String(delivery.getBody());
-                    channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-                    //System.out.println("[x] Received '"+message);
+
+                boolean autoAck = false;
+                GetResponse response = channel.basicGet(QUEUE_NAME, autoAck);
+
+                if (response == null) {
+                    Log.wtf(TAG, "Nu am mesaj");
+                } else {
+                    byte[] body = response.getBody();
+                    long deliveryTag = response.getEnvelope().getDeliveryTag();
+                    Log.wtf(TAG, "Mesaj: "  + new String(body));
+                    channel.basicAck(deliveryTag, false); // acknowledge receipt of the message
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             } finally {
                 try {
                     if(channel!=null && channel.isOpen())
@@ -94,12 +118,7 @@ public class PollService extends IntentService {
             }
         }
 
-
-
-
-
-
-        Log.i(TAG, "Received an intent: " + intent);
+        Log.wtf(TAG, "Received an intent: " + intent);
     }
 
     private boolean isNetworkAvailableAndConnected() {

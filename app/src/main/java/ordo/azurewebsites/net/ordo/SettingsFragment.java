@@ -32,6 +32,8 @@ public class SettingsFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean(getString(R.string.save_notification_shown_key), b);
                 editor.commit();
+
+                PollService.setServiceAlarm(getActivity(),b); // set alarm for new option.
             }
         });
 
