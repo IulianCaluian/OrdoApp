@@ -72,10 +72,12 @@ public class ConfirmOrderFragment extends DialogFragment {
                         final ConnectionFactory factory = new ConnectionFactory();
                         final String QUEUE_NAME = "restaurant_q_" + itm.getRestaurantId();
 
+
+
                         final JSONObject obj = new JSONObject();
                         try {
                             obj.put("order", message);
-                            obj.put("order_id",itm.getItemId().toString());
+                            obj.put("order_id",itemOrder.getId());
                             obj.put("client","test@test.ro");
                             obj.put("table", 2);
                         } catch (JSONException e) {

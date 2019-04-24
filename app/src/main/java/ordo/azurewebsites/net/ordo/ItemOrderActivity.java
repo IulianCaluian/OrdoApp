@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.UUID;
@@ -17,6 +18,7 @@ public class ItemOrderActivity extends SingleFragmentActivity {
     private Toolbar mToolbar;
 
     public static Intent newIntent(Context packageContext, UUID itemOrderId) {
+        Log.wtf("IOAct","ce primesc " + itemOrderId);
         Intent intent = new Intent(packageContext, ItemOrderActivity.class);
         intent.putExtra(EXTRA_ITEM_ORDER_ID, itemOrderId);
         return intent;
@@ -25,6 +27,7 @@ public class ItemOrderActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
         UUID itemOrderId = (UUID) getIntent().getSerializableExtra(EXTRA_ITEM_ORDER_ID);
+        Log.wtf("IOAct","ce extrag " + itemOrderId);
         return ItemOrderFragment.newInstance(itemOrderId);
     }
 
