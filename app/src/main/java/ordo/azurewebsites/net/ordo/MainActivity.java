@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean showNotification = sharedPref.getBoolean(getString(R.string.save_notification_shown_key),false);
+        boolean showNotification = sharedPref.getBoolean(getString(R.string.save_notification_shown_key),true);
         PollService.setServiceAlarm(this,showNotification);
 
         mToolbar = findViewById(R.id.toolbar);

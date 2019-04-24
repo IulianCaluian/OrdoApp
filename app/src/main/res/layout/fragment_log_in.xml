@@ -36,6 +36,7 @@
         android:inputType="textPassword"/>
 
     <Button
+        android:background="@drawable/button"
         android:id="@+id/log_in_button"
         android:layout_marginTop="12dp"
         android:text="@string/log_in_label"
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:background="@drawable/button"
         android:id="@+id/sign_up_button"
         android:layout_marginTop="12dp"
         android:text="@string/sign_up_label"
