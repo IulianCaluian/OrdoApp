@@ -28,7 +28,16 @@
         </activity>
 
         <activity android:name=".MainActivity">
-
+            <intent-filter android:label="Vezi acest restaurant!">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "https://ordo.azurewebsites.net/restaurant” -->
+                <data android:scheme="https"
+                    android:host="ordo.azurewebsites.net"
+                    android:pathPrefix="/restaurant" />
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
         </activity>
 
         <service android:name=".PollService"></service>

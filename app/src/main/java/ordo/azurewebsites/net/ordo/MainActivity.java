@@ -3,6 +3,7 @@ package ordo.azurewebsites.net.ordo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -44,6 +45,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Uri data = intent.getData();
+        if(action!= null && data !=null){
+            getIntent().putExtra(EXTRA_BOOL_HAS_RESTAURANT_ID,true); // pentru a deschide fragmentul restaurant.
+        }
+
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean showNotification = sharedPref.getBoolean(getString(R.string.save_notification_shown_key),true);
