@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -86,6 +87,8 @@ public class ConfirmOrderFragment extends DialogFragment {
 
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
             int restaurant_id = sharedPref.getInt(getString(R.string.save_restaurant_id),1);
+            int table = sharedPref.getInt((getString(R.string.save_table)),0);
+            String userEmail = sharedPref.getString(getString(R.string.save_user_email_key),"no_user");
 
             String message = itemOrder.getTitle();
             ConnectionFactory factory = new ConnectionFactory();
@@ -97,8 +100,8 @@ public class ConfirmOrderFragment extends DialogFragment {
             try {
                 obj.put("order", message);
                 obj.put("order_id",itemOrder.getId());
-                obj.put("client","test@test.ro");
-                obj.put("table", 2);
+                obj.put("client",userEmail);
+                obj.put("table", table);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

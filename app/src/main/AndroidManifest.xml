@@ -16,7 +16,12 @@
         <activity android:name=".SignUpActivity">
         </activity>
         <activity android:name=".LogInActivity">
+            <intent-filter>
 
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".ScanQRActivity">
@@ -37,9 +42,6 @@
                     android:pathPrefix="/restaurant" />
                 <!-- note that the leading "/" is required for pathPrefix-->
 
-                    <action android:name="android.intent.action.MAIN" />
-
-                    <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
 

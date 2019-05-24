@@ -26,6 +26,7 @@ public class RestaurantFragment extends Fragment {
     private TextView mLocationTextView;
     private TextView mOrarTextView;
     private TextView mWelcomeTextView;
+    private TextView mTableTextView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class RestaurantFragment extends Fragment {
         mOrarTextView = view.findViewById(R.id.restaurant_orar_text_view);
         mLocationTextView = view.findViewById(R.id.restaurant_location_text_view);
         mWelcomeTextView = view.findViewById(R.id.restaurant_welcome_text_view);
+        mTableTextView = view.findViewById(R.id.restaurant_table_text_view);
         mWelcomeTextView.setVisibility(View.GONE);
 
         /*Create handle for the RetrofitInstance interface*/
@@ -54,6 +56,10 @@ public class RestaurantFragment extends Fragment {
                     mNameTextView.setText(response.body().getRestaurantName());
                     mLocationTextView.setText(response.body().getRestaurantLocation());
                     mOrarTextView.setText(response.body().getRestaurantOrar());
+
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    int table = sharedPref.getInt((getString(R.string.save_table)),0);
+                    mTableTextView.setText("Masa " + table);
                 } catch (Exception ex){
                     Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                 }
