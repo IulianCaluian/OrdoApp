@@ -4,6 +4,7 @@
 
     <!--<uses-permission android:name="android.permission.INTERNET" />-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -15,13 +16,11 @@
         <activity android:name=".SignUpActivity">
         </activity>
         <activity android:name=".LogInActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ScanQRActivity">
+
         </activity>
         <activity android:name=".ItemOrderActivity"
             android:parentActivityName=".MainActivity">
@@ -37,9 +36,20 @@
                     android:host="ordo.azurewebsites.net"
                     android:pathPrefix="/restaurant" />
                 <!-- note that the leading "/" is required for pathPrefix-->
+
+                    <action android:name="android.intent.action.MAIN" />
+
+                    <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+
         </activity>
 
+        <activity android:name=".ScanMainActivity">
+
+        </activity>
+
+        <activity android:name=".SimpleScannerActivity"></activity>
         <service android:name=".PollService"></service>
     </application>
 

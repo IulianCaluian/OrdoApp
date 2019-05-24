@@ -1,6 +1,8 @@
 package ordo.azurewebsites.net.ordo;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,7 +40,9 @@ public class RestaurantFragment extends Fragment {
         GetRestaurantDataService service = RetrofitInstance.getRetrofitInstance().create(GetRestaurantDataService.class);
 
         /*Call the method with parameter in the interface to get the employee data*/
-        Call<Restaurant> call = service.getItemData(1);
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int restaurantID = sharedPref.getInt(getString(R.string.save_restaurant_id),0);
+        Call<Restaurant> call = service.getItemData(restaurantID);
 
         Log.wtf("URL Calling: ", call.request().url() + ".");
         call.enqueue(new Callback<Restaurant>() {
