@@ -14,4 +14,20 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+//
+//    @Test
+//    public void multiplication_isCorrect() {
+//        assertEquals(4,2*2);
+//    }
+//
+//    @Test
+//    public void power_isCorrect() {
+//        assertEquals(4, (int)(Math.pow(2,2)));
+//    }
+//
+//    @Test
+//    public void power_isCorrect2() {
+//        assertEquals(4, (int)(Math.pow(2,2)));
+//    }
+//
 }

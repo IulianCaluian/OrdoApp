@@ -16,7 +16,8 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Comanda" />
+        tools:text="Comanda"
+        />
 
     <TextView
         android:id="@+id/item_order_date"
