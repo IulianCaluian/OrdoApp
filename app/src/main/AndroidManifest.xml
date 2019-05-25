@@ -47,10 +47,6 @@
 
         </activity>
 
-        <activity android:name=".ScanMainActivity">
-
-        </activity>
-
         <activity android:name=".SimpleScannerActivity"></activity>
         <service android:name=".PollService"></service>
     </application>

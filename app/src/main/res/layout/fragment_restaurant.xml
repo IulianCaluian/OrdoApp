@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,11 +27,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Bine ati venit!"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/bine_ati_venit"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/restaurant_name_text_view"
@@ -40,9 +38,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textSize="36sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:text="Restaurant Rio" />
 
         <TextView
@@ -53,9 +48,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/restaurant_name_text_view"
             tools:text="str Ion bla bla bla" />
 
         <TextView
@@ -67,10 +59,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/restaurant_location_text_view"
             tools:text="20 - 20" />
 
 
@@ -83,10 +71,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/restaurant_location_text_view"
             tools:text="Masa 99" />
     </LinearLayout>
 
