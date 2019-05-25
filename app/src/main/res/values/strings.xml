@@ -20,4 +20,8 @@
     <string name="string_confirmare_intrebare">Esti sigur ca vrei sa realizezi urmatoarea comanda?</string>
     <string name="simple_activity_sample">Simple activity</string>
     <string name="bine_ati_venit">Bine ati venit!</string>
+    <string name="error">Eroare</string>
+    <string name="saved_message">Image Saved at %1$s</string>
+    <string name="no_faces_message">Nu sunt fete</string>
+    <string name="permission_denied">Permisiune respinsa</string>
 </resources>
